@@ -24,6 +24,13 @@ public class Note {
     @NonNull
     Date creationDate;
 
+
+    public Note() {
+        this.title = "";
+        this.content = "";
+        this.creationDate = new Date();
+    }
+    
     public Note(String title, String content, Date creationDate) {
         this.title = title;
         this.content = content;
