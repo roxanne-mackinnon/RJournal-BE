@@ -1,5 +1,6 @@
 package com.rjournal.rjournal.controllers;
 
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -41,8 +42,14 @@ public class NoteController {
         return noteRepo.save(note);
     }
 
-    @GetMapping("/note/filter")
+    @GetMapping(path = "/note/filter", params = {"searchTerm"})
     public List<Note> findBySearchTerm(@NonNull @RequestParam("searchTerm") String searchTerm) {
         return noteRepo.findByTitleContentContains(searchTerm);
+    }
+
+    @GetMapping(path = "/note/filter", params = {"startDate", "endDate"})
+    public List<Note> findByDateRange(@NonNull @RequestParam("startDate") Date startDate,
+                                      @NonNull @RequestParam("endDate") Date endDate) {
+        return noteRepo.findWithinDateRange(startDate, endDate);                                    
     }
 }
