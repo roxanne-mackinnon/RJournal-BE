@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.NonNull;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,8 +49,8 @@ public class NoteController {
     }
 
     @GetMapping(path = "/note/filter", params = {"startDate", "endDate"})
-    public List<Note> findByDateRange(@NonNull @RequestParam("startDate") Date startDate,
-                                      @NonNull @RequestParam("endDate") Date endDate) {
+    public List<Note> findByDateRange(@NonNull @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
+                                      @NonNull @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate) {
         return noteRepo.findWithinDateRange(startDate, endDate);                                    
     }
 }
