@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rjournal.rjournal.models.Note;
+import com.rjournal.rjournal.models.NoteEntity;
 import com.rjournal.rjournal.repositories.NoteRepository;
 
 @RestController
@@ -29,27 +29,27 @@ public class NoteController {
     }
     
     @GetMapping("/note/{id}")
-    public Note getNote(@PathVariable("id") Long id) throws NoSuchElementException {
+    public NoteEntity getNote(@PathVariable("id") Long id) throws NoSuchElementException {
         return noteRepo.findById(id).orElseThrow();
     }
 
     @PostMapping("/note")
-    public Note postNote(@Validated Note note) {
+    public NoteEntity postNote(@Validated NoteEntity note) {
         return noteRepo.save(note);
     }
 
     @PutMapping("/note/{id}")
-    public Note putNote(@Validated Note note) {
+    public NoteEntity putNote(@Validated NoteEntity note) {
         return noteRepo.save(note);
     }
 
     @GetMapping(path = "/note/filter", params = {"searchTerm"})
-    public List<Note> findBySearchTerm(@NonNull @RequestParam("searchTerm") String searchTerm) {
+    public List<NoteEntity> findBySearchTerm(@NonNull @RequestParam("searchTerm") String searchTerm) {
         return noteRepo.findByTitleContentContains(searchTerm);
     }
 
     @GetMapping(path = "/note/filter", params = {"startDate", "endDate"})
-    public List<Note> findByDateRange(@NonNull @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
+    public List<NoteEntity> findByDateRange(@NonNull @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
                                       @NonNull @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate) {
         return noteRepo.findWithinDateRange(startDate, endDate);                                    
     }

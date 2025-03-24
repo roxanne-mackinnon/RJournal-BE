@@ -10,34 +10,34 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Note {
+public class NoteEntity {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    Long id;
+    private Long id;
     
     @NonNull
-    String title;
+    private String title;
 
     @NonNull
-    String content;
+    private String content;
 
     @NonNull
-    Date creationDate;
+    private Date creationDate;
 
 
-    public Note() {
+    public NoteEntity() {
         this.title = "";
         this.content = "";
         this.creationDate = new Date();
     }
     
-    public Note(String title, String content, Date creationDate) {
+    public NoteEntity(String title, String content, Date creationDate) {
         this.title = title;
         this.content = content;
         this.creationDate = creationDate;
     }
 
-    public Note(Long id, String title, String content, Date creationDate) {
+    public NoteEntity(Long id, String title, String content, Date creationDate) {
         this.id = id;
         this.title = title;
         this.content = content;
