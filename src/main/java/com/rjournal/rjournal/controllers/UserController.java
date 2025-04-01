@@ -1,5 +1,7 @@
 package com.rjournal.rjournal.controllers;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,8 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rjournal.rjournal.dto.UserDto;
 import com.rjournal.rjournal.models.UserEntity;
 import com.rjournal.rjournal.service.UserService;
-
-import jakarta.websocket.server.PathParam;
 
 @RestController
 @ResponseBody
@@ -26,9 +26,9 @@ public class UserController {
     }
 
 
-
     @GetMapping("/{id}")
-    public UserDto getUser(@PathVariable("id") Long id) throws UsernameNotFoundException{
+    public UserDto getUser(@AuthenticationPrincipal UserDetails user, @PathVariable("id") Long id) throws UsernameNotFoundException {
+        System.err.println(user.getUsername());
         UserEntity result = userService.findUserById(id);
         return userService.toDto(result);
     }
