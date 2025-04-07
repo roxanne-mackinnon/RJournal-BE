@@ -28,7 +28,7 @@ public class NoteController {
         this.noteRepo = repo;
     }
     
-    @GetMapping("/note/{id}")
+    @GetMapping("/note/{id}") 
     public NoteEntity getNote(@PathVariable("id") Long id) throws NoSuchElementException {
         return noteRepo.findById(id).orElseThrow();
     }

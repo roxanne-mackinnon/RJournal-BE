@@ -17,7 +17,7 @@ import com.rjournal.rjournal.models.UserEntity;
 public interface NoteRepository
     extends CrudRepository<NoteEntity, Long> {
 
-    @Query("SELECT new Pair(note,user) FROM NoteEntity note, UserEntity user WHERE note.id = :noteId AND user.email = :userEmail")
+    @Query("SELECT new org.springframework.data.util.Pair(note,user) FROM NoteEntity note, UserEntity user WHERE note.id = :noteId AND user.email = :userEmail")
     Optional<Pair<NoteEntity,UserEntity>> findByUserNoteId(@Param("userEmail") String userEmail, @Param("noteId") Long noteId);
 
     @Query("SELECT n FROM NoteEntity n where n.title LIKE :searchTerm OR n.content LIKE :searchTerm")

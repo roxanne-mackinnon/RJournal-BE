@@ -28,7 +28,6 @@ public class UserController {
 
     @GetMapping("/{id}")
     public UserDto getUser(@AuthenticationPrincipal UserDetails user, @PathVariable("id") Long id) throws UsernameNotFoundException {
-        System.err.println(user.getUsername());
         UserEntity result = userService.findUserById(id);
         return userService.toDto(result);
     }
