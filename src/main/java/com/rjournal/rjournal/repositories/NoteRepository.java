@@ -1,6 +1,6 @@
 package com.rjournal.rjournal.repositories;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,5 +24,5 @@ public interface NoteRepository
     List<NoteEntity> findByTitleContentContains(@Param("searchTerm") String searchTerm);
 
     @Query("SELECT n FROM NoteEntity n WHERE n.creationDate >= :startDate OR n.creationDate <= :endDate")
-    List<NoteEntity> findWithinDateRange(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    List<NoteEntity> findWithinDateRange(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 }

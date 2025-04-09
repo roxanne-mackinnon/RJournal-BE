@@ -1,6 +1,6 @@
 package com.rjournal.rjournal.models;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.springframework.lang.NonNull;
 
@@ -22,22 +22,22 @@ public class NoteEntity {
     private String content;
 
     @NonNull
-    private Date creationDate;
+    private LocalDate creationDate;
 
 
     public NoteEntity() {
         this.title = "";
         this.content = "";
-        this.creationDate = new Date();
+        this.creationDate = LocalDate.now();
     }
     
-    public NoteEntity(String title, String content, Date creationDate) {
+    public NoteEntity(String title, String content, LocalDate creationDate) {
         this.title = title;
         this.content = content;
         this.creationDate = creationDate;
     }
 
-    public NoteEntity(Long id, String title, String content, Date creationDate) {
+    public NoteEntity(Long id, String title, String content, LocalDate creationDate) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -68,11 +68,11 @@ public class NoteEntity {
         this.content = content;
     }
 
-    public Date getCreationDate() {
+    public LocalDate getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
 }

@@ -1,6 +1,6 @@
 package com.rjournal.rjournal.controllers;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -49,8 +49,10 @@ public class NoteController {
     }
 
     @GetMapping(path = "/note/filter", params = {"startDate", "endDate"})
-    public List<NoteEntity> findByDateRange(@NonNull @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
-                                      @NonNull @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate) {
+    public List<NoteEntity> findByDateRange(@NonNull @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+                                                LocalDate startDate,
+                                            @NonNull @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+                                                LocalDate endDate) {
         return noteRepo.findWithinDateRange(startDate, endDate);                                    
     }
 }
